@@ -15,6 +15,7 @@ const storage = firebase.storage();
 const PASSWORD = "333cyj1116"; // 你可以改成自己的密碼
 
 const form = document.getElementById("uploadForm");
+const titleInput = document.getElementById("titleInput");
 const transcript = document.getElementById("transcript");
 const mediaFile = document.getElementById("mediaFile");
 const dateInput = document.getElementById("dateInput");
@@ -34,14 +35,23 @@ form.onsubmit = async (e) => {
   e.preventDefault();
   result.textContent = "";
 
+  if (!titleInput.value.trim()) {
+    result.textContent = "請填寫標題";
+    return;
+  }
+
   if (!transcript.value.trim()) {
     result.textContent = "請填寫逐字稿文字";
     return;
   }
+
   if (!mediaFile.files[0]) {
     result.textContent = "請選擇音檔或影片檔案";
     return;
   }
+
+  // 後面開始處理檔案...
+
 
   const file = mediaFile.files[0];
   const mimeType = file.type;
