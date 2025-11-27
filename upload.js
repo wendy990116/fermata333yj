@@ -66,14 +66,16 @@ form.onsubmit = async (e) => {
     const snap = await storage.ref(remoteName).put(file);
     const url = await snap.ref.getDownloadURL();
 
-    await db.collection("messages").add({
-      text: transcript.value.trim(),
-      mediaUrl: url,
-      mediaType: mediaType,
-      fileName: file.name,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      date: dateStr
-    });
+   await db.collection("messages").add({
+  title: titleInput.value.trim(),           // ← 新增這一行
+  text: transcript.value.trim(),
+  mediaUrl: url,
+  mediaType: mediaType,
+  fileName: file.name,
+  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  date: dateStr
+});
+
 
     result.textContent = "✓ 上傳成功！";
     form.reset();
