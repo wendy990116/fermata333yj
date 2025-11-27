@@ -7,16 +7,23 @@
 </head>
 <body>
   <h2>每日影音/音訊上傳</h2>
-  <form id="uploadForm">
-    <label>逐字稿內容：</label><br>
-    <textarea id="transcript" rows="7" style="width:90%"></textarea><br><br>
-    <label>選擇檔案（音訊或影片）：</label>
-    <input type="file" id="mediaFile" accept="audio/*,video/*"><br><br>
-    <label>日期：</label>
-    <input type="date" id="dateInput"><br><br>
-    <button type="submit">上傳</button>
-  </form>
-  <div id="result"></div>
+ <form id="uploadForm">
+  <label>標題：</label><br>
+  <input id="titleInput" type="text" style="width:90%" placeholder="今天這段的主題或一句話標題"><br><br>
+
+  <label>逐字稿內容：</label><br>
+  <textarea id="transcript" rows="7" style="width:90%"></textarea><br><br>
+
+  <label>選擇檔案（音訊或影片）：</label>
+  <input type="file" id="mediaFile" accept="audio/*,video/*"><br><br>
+
+  <label>日期：</label>
+  <input type="date" id="dateInput"><br><br>
+
+  <button type="submit">上傳</button>
+</form>
+<div id="result"></div>
+
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
