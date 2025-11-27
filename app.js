@@ -1,7 +1,12 @@
-// 這裡等一下用「新的 firebaseConfig」取代
-const firebaseConfig = {
-  // 當你在 Firebase Console 產生新的網頁應用程式後貼進來
-};
+// Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCVxXn8MPF1BU6V4WhCAB5HJZ2eQlQ5Fz0",
+    authDomain: "fermata-333yj.firebaseapp.com",
+    projectId: "fermata-333yj",
+    storageBucket: "fermata-333yj.firebasestorage.app",
+    messagingSenderId: "360093400346",
+    appId: "1:360093400346:web:b2ee52979c7d180c4cc0a3"
+  };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
