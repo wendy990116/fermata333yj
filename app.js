@@ -15,24 +15,30 @@ const list = document.getElementById('list');
 
 function render(msg) {
   const li = document.createElement('li');
+  li.className = 'card';
+
+  const created =
+    msg.createdAt && msg.createdAt.seconds
+      ? new Date(msg.createdAt.seconds * 1000)
+      : null;
+
   li.innerHTML = `
-    <div>
-      <p>${(msg.text || '').replace(/</g, '&lt;')}</p>
-      ${
-        msg.mediaUrl
-          ? (msg.mediaType === 'video'
-              ? `<video controls width="320" src="${msg.mediaUrl}"></video>`
-              : `<audio controls src="${msg.mediaUrl}"></audio>`
-            )
-          : ''
-      }
-      <div style="font-size:12px;color:#666;">
-        ${msg.date || ''} ${msg.createdAt ? new Date(msg.createdAt.seconds * 1000).toLocaleString() : ''}
-      </div>
+    <div class="text">${(msg.text || '').replace(/</g, '&lt;')}</div>
+    ${
+      msg.mediaUrl
+        ? (msg.mediaType === 'video'
+            ? `<video controls src="${msg.mediaUrl}"></video>`
+            : `<audio controls src="${msg.mediaUrl}"></audio>`
+          )
+        : ''
+    }
+    <div class="meta">
+      ${msg.date || ''}${created ? ' · ' + created.toLocaleString() : ''}
     </div>
   `;
   list.appendChild(li);
 }
+
 
 db.collection('messages')
   .orderBy('createdAt', 'desc')
