@@ -96,17 +96,17 @@ function renderCard(msg) {
     ${msg.title ? `<div class="title">${(msg.title || '').replace(/</g, '&lt;')}</div>` : ''}
     <div class="text">${(msg.text || '').replace(/</g, '&lt;')}</div>
     ${
-  msg.mediaUrl
-    ? (
-        msg.mediaType === 'video'
-          ? `<video controls src="${msg.mediaUrl}"></video>`
-          : msg.mediaType === 'audio'
-            ? `<audio controls src="${msg.mediaUrl}"></audio>`
-            : msg.mediaType === 'image'
-              ? `<img src="${msg.mediaUrl}" style="max-width:100%;border-radius:10px;display:block;">`
-              : ''
-      )
-    : ''
+      msg.mediaUrl
+        ? (
+            msg.mediaType === 'video'
+              ? `<video controls src="${msg.mediaUrl}"></video>`
+              : msg.mediaType === 'audio'
+                ? `<audio controls src="${msg.mediaUrl}"></audio>`
+                : msg.mediaType === 'image'
+                  ? `<img src="${msg.mediaUrl}" style="max-width:100%;border-radius:10px;display:block;">`
+                  : ''
+          )
+        : ''
     }
     <div class="meta">
       ${created ? created.toLocaleString() : ''}
