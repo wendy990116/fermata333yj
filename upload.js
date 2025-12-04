@@ -53,7 +53,7 @@ form.onsubmit = async (e) => {
   const file = mediaFile.files[0];
   const mimeType = file.type;
 
-  // 判斷檔案類型：video / audio / image
+  // 判斷檔案類型
   let mediaType = "file";
   if (mimeType.startsWith("video/")) {
     mediaType = "video";
