@@ -54,9 +54,15 @@ form.onsubmit = async (e) => {
 
 
   const file = mediaFile.files[0];
-  const mimeType = file.type;
-  const isVideo = mimeType.startsWith("video/");
-  const mediaType = isVideo ? "video" : "audio";
+const mimeType = file.type;
+
+let mediaType = "file";
+if (mimeType.startsWith("video/")) {
+  mediaType = "video";
+} else if (mimeType.startsWith("audio/")) {
+  mediaType = "audio";
+} else if (mimeType.startsWith("image/")) {
+  mediaType = "image";
   const dateStr = dateInput.value;
   const remoteName = `media/${dateStr}_${file.name}`;
 
