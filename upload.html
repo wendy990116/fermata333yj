@@ -4,29 +4,40 @@
   <meta charset="UTF-8">
   <title>上傳每日影音/音訊</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: system-ui; max-width: 800px; margin: 0 auto; padding: 20px; }
+    input, textarea, button { font-size: 16px; padding: 8px; }
+    #result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+    .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .uploading { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+  </style>
 </head>
 <body>
-  <h2>每日影音/音訊上傳</h2>
- <form id="uploadForm">
-  <label>標題：</label><br>
-  <input id="titleInput" type="text" style="width:90%" placeholder="今天這段的主題或一句話標題"><br><br>
+  <h2>📹 每日影音/音訊上傳</h2>
+  <form id="uploadForm">
+    <label>標題：</label><br>
+    <input id="titleInput" type="text" style="width:90%" placeholder="今天這段的主題或一句話標題" required><br><br>
 
-  <label>逐字稿內容：</label><br>
-  <textarea id="transcript" rows="7" style="width:90%"></textarea><br><br>
+    <label>逐字稿內容：</label><br>
+    <textarea id="transcript" rows="7" style="width:90%" required></textarea><br><br>
 
-  <label>選擇檔案（音訊或影片）：</label>
-  <input type="file" id="mediaFile" accept="audio/*,video/*,image/*"><br><br>
+    <label>選擇檔案（音訊/影片/圖片）：</label><br>
+    <input type="file" id="mediaFile" accept="audio/*,video/*,image/*" required><br><br>
 
-  <label>日期：</label>
-  <input type="date" id="dateInput"><br><br>
+    <label>日期：</label>
+    <input type="date" id="dateInput" required><br><br>
 
-  <button type="submit">上傳</button>
-</form>
-<div id="result"></div>
+    <!-- 🔧 改成 type="button"，綁定 onclick -->
+    <button type="button" id="uploadButton">🚀 上傳</button>
+    <button type="reset">🔄 清空</button>
+  </form>
+  
+  <div id="result"></div>
 
-
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK v8 -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
@@ -34,4 +45,3 @@
   <script src="upload.js"></script>
 </body>
 </html>
-
