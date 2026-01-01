@@ -11,8 +11,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
+const auth = firebase.auth();  // ← 新增這行
 
-const PASSWORD = "333cyj1116"; // 你可以改成自己的密碼
+const ADMIN_EMAIL = "admin@fermata333yj.com";  // ← 先在 Console 創這個帳號
+const ADMIN_PASSWORD = "333cyj1116";          // ← 跟你的密碼一樣
+const PASSWORD = "333cyj1116"; // 前端密碼（可改）
 
 const form = document.getElementById("uploadForm");
 const titleInput = document.getElementById("titleInput");
@@ -24,16 +27,40 @@ const result = document.getElementById("result");
 // 日期預設今天
 dateInput.value = new Date().toISOString().slice(0, 10);
 
-// 簡單密碼驗證
+// 1. 先驗前端密碼
 let inputPass = prompt("請輸入上傳密碼：");
 if (inputPass !== PASSWORD) {
   document.body.innerHTML = "<h2>❌ 密碼錯誤，暫時無法使用上傳頁面。</h2>";
 }
 
-// 表單送出
+// 2. 密碼對 → Firebase Auth 自動登入管理員
+auth.signInWithEmailAndPassword(ADMIN_EMAIL, ADMIN_PASSWORD)
+  .then(() => {
+    console.log("✓ Firebase 管理員登入成功");
+  })
+  .catch((error) => {
+    console.error("Firebase 登入失敗：", error.message);
+    result.textContent = "系統錯誤：請聯絡管理員設定帳號";
+  });
+
+// 3. 監聽登入狀態（確保上傳時已登入）
+auth.onAuthStateChanged((user) => {
+  if (!user) {
+    result.textContent = "請重新整理頁面並輸入密碼";
+  }
+});
+
+// 表單送出（不變）
 form.onsubmit = async (e) => {
   e.preventDefault();
   result.textContent = "";
+
+  // 檢查登入狀態
+  const user = auth.currentUser;
+  if (!user) {
+    result.textContent = "請先輸入密碼登入！";
+    return;
+  }
 
   if (!titleInput.value.trim()) {
     result.textContent = "請填寫標題";
