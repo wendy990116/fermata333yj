@@ -10,7 +10,6 @@ appId: "1:360093400346:web:b2ee52979c7d180c4cc0a3"
 
 const db = firebase.firestore();
 const storage = firebase.storage();
-const auth = firebase.auth();
 
 // 設定
 const ADMIN_EMAIL = "admin@fermata333yj.com";
