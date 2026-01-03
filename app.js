@@ -17,13 +17,12 @@ const searchInput = document.getElementById('searchInput');
 
 let allMessages = [];
 
-// 從 Firestore 讀資料
+// 從 Firestore 讀資料（雙重排序：createdAt + date）
 db.collection('messages')
   .orderBy('createdAt', 'desc')
   .onSnapshot((snap) => {
     allMessages = [];
-    snap.forEach(doc => {
-      allMessages.push(doc.data());
+    snap.forEach(doc.data());
     });
     renderAll();
   });
