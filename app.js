@@ -23,9 +23,8 @@ db.collection('messages')
   .onSnapshot((snap) => {
     allMessages = [];
     snap.forEach(doc.data());
-    );
+    });
     renderAll();
-  });
 
 // 依搜尋＋日期分組顯示全部
 function renderAll() {
