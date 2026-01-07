@@ -23,7 +23,7 @@ db.collection('messages')
   .onSnapshot((snap) => {
     allMessages = [];
     snap.forEach(doc.data());
-    });
+    );
     renderAll();
   });
 
